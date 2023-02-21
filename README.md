@@ -5,7 +5,7 @@
 
 # Ukhaan Tukka API
 
-The UkhaanTukka API provides access to a list of Nepali idioms, known as *ukhaans* in Nepali, along with their Roman transliteration, English meaning, and an example sentence. The API makes a request to the **`README.md`** file from <a href = ''>nepali-ukhaan</a> repository to the fetch data and can be used to fetch the full list of *ukhaan* or to search for a particular *ukhaan* based on its Nepali name, Roman transliteration, or meaning.
+The *UkhaanTukka* API provides access to a list of Nepali idioms, known as *ukhaan* in Nepali, along with their Roman transliteration, English meaning, and an example sentence. The API makes a request to the **`README.md`** file from <a href = ''>nepali-ukhaan</a> repository to the fetch data and can be used to fetch the full list of *ukhaan* or to search for a particular *ukhaan* based on its Nepali name, Roman transliteration, or meaning.
 
 
 # Endpoints
@@ -35,7 +35,7 @@ The response will be a JSON object containing a list of *ukhaan*. You can use th
 http://localhost:8000/ukhaantukka?limit=10&offset=0
 ```
 
-To retrieve all *ukhaan* at once, withouth pagination:
+To retrieve all *ukhaan* at once, without pagination:
 ```python
 http://localhost:8000/ukhaantukka?show_all=true
 ```
@@ -43,6 +43,11 @@ http://localhost:8000/ukhaantukka?show_all=true
 To retrieve the first 50 *ukhaan* sorted by Nepali text:
 ```python
 http://localhost:8000/ukhaantukka/nepali?limit=50&offset=0
+```
+
+To retrieve the second 100 *ukhaan* of the second page sorted by Nepali text:
+```python
+http://localhost:8000/ukhaantukka/nepali?limit=200&offset=100
 ```
 
 # License
