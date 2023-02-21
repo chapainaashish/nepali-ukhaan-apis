@@ -1,7 +1,7 @@
 ﻿# nepali-ukhaan-apis
 
 
-**Hang on tight, This is currently in a development stage**
+**Hang on tight, This is currently in a development stage.**
 
 # Ukhaan Tukka API
 
