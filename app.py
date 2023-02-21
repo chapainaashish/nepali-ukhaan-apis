@@ -13,39 +13,67 @@ example_lists = ukhaan.example()
 app = FastAPI()
 
 @app.get("/ukhaantukka")
-def main_page():
-    return {
-        'Nepali': nepali_lists,
-        'Roman': roman_lists,
-        'Meaning': meaning_lists,
-        'Example': example_lists,
-        }
+def main_page(limit: int = 100, offset: int = 0, show_all: bool = False):
+    if show_all:
+        return {
+                'Nepali': nepali_lists,
+                'Roman': roman_lists,
+                'Meaning': meaning_lists,
+                'Example': example_lists,
+            }        
+    else:
+        return {
+            'Nepali': nepali_lists[offset : offset + limit],
+            'Roman': roman_lists[offset : offset + limit],
+            'Meaning': meaning_lists[offset : offset + limit],
+            'Example': example_lists[offset : offset + limit],
+            }
 
 
 @app.get("/ukhaantukka/nepali")
-def nepali():
-    return {
-        "Nepali": nepali_lists,
-    }
+def nepali(limit: int = 100, offset: int = 0, show_all: bool = False):
+    if show_all:
+        return {
+            "Nepali": nepali_lists,
+        }
+    else:
+        return {
+            "Nepali": nepali_lists[offset : offset + limit],
+        }
 
 
 @app.get("/ukhaantukka/roman")
-def roman():
-    return {
-        'Roman': roman_lists,
-    }
+def roman(limit: int = 100, offset: int = 0, show_all: bool = False):
+    if show_all:
+        return {
+            'Roman': roman_lists,
+        }
+    else:
+        return {
+            'Roman': roman_lists[offset : offset + limit],
+        }
 
 
 @app.get("/ukhaantukka/meaning")
-def meaning():
-    return {
-        'Meaning': meaning_lists,
-    }
+def meaning(limit: int = 100, offset: int = 0, show_all: bool = False):
+    if show_all:
+        return {
+            'Meaning': meaning_lists,
+        }
+    else:
+        return {
+            'Meaning': meaning_lists[offset : offset + limit],
+        }
 
 
 @app.get("/ukhaantukka/example")
-def example():
-    return {
-        'Example': example_lists,
-    }
+def example(limit: int = 100, offset: int = 0, show_all: bool = False):
+    if show_all:
+        return {
+            'Example': example_lists,
+        }
+    else:
+        return {
+            'Example': example_lists[offset : offset + limit],
+        }
 
