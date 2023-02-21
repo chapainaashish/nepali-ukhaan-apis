@@ -42,7 +42,7 @@ http://localhost:8000/ukhaantukka?show_all=true
 
 To retrieve the first 50 *ukhaan* sorted by Nepali text:
 ```python
-http://localhost:8000/ukhaantukka/nepali?limit=10&offset=0
+http://localhost:8000/ukhaantukka/nepali?limit=50&offset=0
 ```
 
 # License
