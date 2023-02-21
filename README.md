@@ -1,7 +1,7 @@
 ﻿# nepali-ukhaan-apis
 
 
-**Hang on tight, This is currently in a deveolpment stage**
+**Hang on tight, This is currently in a development stage**
 
 # Ukhaan Tukka API
 
@@ -40,11 +40,11 @@ To retrieve all *ukhaan* at once, withouth pagination:
 http://localhost:8000/ukhaantukka?show_all=true
 ```
 
-To retrieve the first 10 *ukhaan* sorted by Nepali text:
+To retrieve the first 50 *ukhaan* sorted by Nepali text:
 ```python
 http://localhost:8000/ukhaantukka/nepali?limit=10&offset=0
 ```
 
 # License
 
-The *ukhaan* data used in this API is collected and forked from the <a href = "https://github.com/chapainaashish/nepali-ukhaan">nepali-ukhaan</a> repository on GitHub and is free to use and modify. We would like to thank <a href = "https://github.com/chapainaashish">Aashish Chapain</a> and the entire community for contributing to this repository and making this API possible.
+The *ukhaan* data used in this API is collected and forked from the <a href = "https://github.com/chapainaashish/nepali-ukhaan">nepali-ukhaan</a> repository on GitHub and is free to use and modify under MIT license. We would like to thank <a href = "https://github.com/chapainaashish">Aashish Chapain</a> and the entire community for contributing to this repository and making this API possible.
