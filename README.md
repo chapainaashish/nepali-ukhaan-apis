@@ -1,4 +1,4 @@
 ﻿# nepali-ukhaan-apis
 
 
-**Hang on tight, This is currently in a deveolpment stage**
+**Hang on tight, this is currently in a development stage**
