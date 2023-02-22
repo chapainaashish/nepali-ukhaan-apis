@@ -1,8 +1,9 @@
 from fastapi import FastAPI
-from tools import UkhaanTable
+from tools import UkhaanTable, UkhaanFunctionalities
 
 
 ukhaan = UkhaanTable()
+functionalities = UkhaanFunctionalities()
 
 nepali_lists = ukhaan.nepali()
 roman_lists = ukhaan.roman()
@@ -11,6 +12,7 @@ example_lists = ukhaan.example()
 
 
 app = FastAPI()
+
 
 @app.get("/ukhaantukka")
 def main_page(limit: int = 100, offset: int = 0, show_all: bool = False):
@@ -28,6 +30,7 @@ def main_page(limit: int = 100, offset: int = 0, show_all: bool = False):
             'Meaning': meaning_lists[offset : offset + limit],
             'Example': example_lists[offset : offset + limit],
             }
+
 
 
 @app.get("/ukhaantukka/nepali")
@@ -77,3 +80,38 @@ def example(limit: int = 100, offset: int = 0, show_all: bool = False):
             'Example': example_lists[offset : offset + limit],
         }
 
+
+@app.get("/random-ukhaan")
+def random_ukhaan():    
+    return functionalities.random_ukhaan()
+
+
+
+@app.get("/random-ukhaan/nepali")
+def random_nepali():
+    return {
+        'Nepali': functionalities.random_nepali().strip()
+    }
+
+
+@app.get("/random-ukhaan/roman")
+def random_roman():
+    return {
+        'Roman': functionalities.random_roman().strip()
+    }
+
+
+@app.get("/random-ukhaan/meaning")
+def random_meaning():
+    return {
+        'Meaning': functionalities.random_meaning().strip()
+    }
+
+
+@app.get("/random-ukhaan/example")
+def random_example():
+    return {
+        'Example': functionalities.random_example().strip()
+    }
+
+    
