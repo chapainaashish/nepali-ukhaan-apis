@@ -54,4 +54,4 @@ To view the Swagger documentation for this API, open your browser and navigate t
 
 The *ukhaan* data used in this API is collected and forked from the <a href = "https://github.com/chapainaashish/nepali-ukhaan">nepali-ukhaan</a> repository on GitHub and is free to use and modify under MIT license. We would like to thank <a href = "https://github.com/chapainaashish">Aashish Chapain</a> and the entire community for contributing to this repository and making this API possible.
 
-**Current: Development Stage**
+**Please note that this is currently under a development stage and there might be some fault in code or needed some optimization**
