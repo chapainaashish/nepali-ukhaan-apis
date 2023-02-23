@@ -1,7 +1,7 @@
+import random
 import markdown
 import requests
 from bs4 import BeautifulSoup
-
 
 class UkhaanTable:
     def __init__(self):        
@@ -53,3 +53,39 @@ class UkhaanTable:
     def example(self):
         return self.extract_phase_two()[-1]
 
+class UkhaanFunctionalities(UkhaanTable):
+    def __init__(self):
+        super().__init__()
+        
+
+    def random_ukhaan(self):        
+        indexes = random.randint(0, len(self.extract_phase_one(0)))
+        nepali = self.extract_phase_one(0)[indexes]
+        roman = self.extract_phase_one(1)[indexes]
+        meaning = self.extract_phase_two()[0][indexes]
+        example = self.extract_phase_two()[-1][indexes]
+
+        data = {
+                'Nepali': nepali.strip(),
+                'Roman': roman.strip(),
+                'Meaning': meaning.strip(),
+                'Example': example.strip(),
+            }
+        
+        return data
+    
+    def random_nepali(self):
+        indexes = random.randint(0, len(self.extract_phase_one(0)))
+        return self.extract_phase_one(0)[indexes]
+
+    def random_roman(self):
+        indexes = random.randint(0, len(self.extract_phase_one(1)))
+        return self.extract_phase_one(1)[indexes]
+    
+    def random_meaning(self):
+        indexes = random.randint(0, len(self.extract_phase_two()[0]))
+        return self.extract_phase_two()[0][indexes]
+    
+    def random_example(self):
+        indexes = random.randint(0, len(self.extract_phase_two()[-1]))
+        return self.extract_phase_two()[-1][indexes]
