@@ -1,91 +1,71 @@
 from fastapi import FastAPI
-from tools import UkhaanTable, UkhaanFunctionalities
+from tools import UkhaanTable, UkhaanFunctionalities, get_language_list
 
 
+# Create instances of UkhaanTable and UkhaanFunctionalities classes:
 ukhaan = UkhaanTable()
 functionalities = UkhaanFunctionalities()
 
+# Get the lists of Nepali, Roman, Meaning and Example words from the UkhaanTable instance:
 nepali_lists = ukhaan.nepali()
 roman_lists = ukhaan.roman()
 meaning_lists = ukhaan.meaning()
 example_lists = ukhaan.example()
 
 
+# Initialize a FastAPI instance:
 app = FastAPI()
 
 
+# Define a route to get all UkhaanTukka:
 @app.get("/ukhaantukka")
-def main_page(limit: int = 100, offset: int = 0, show_all: bool = False):
-    if show_all:
-        return {
-                'Nepali': nepali_lists,
-                'Roman': roman_lists,
-                'Meaning': meaning_lists,
-                'Example': example_lists,
-            }        
-    else:
-        return {
-            'Nepali': nepali_lists[offset : offset + limit],
-            'Roman': roman_lists[offset : offset + limit],
-            'Meaning': meaning_lists[offset : offset + limit],
-            'Example': example_lists[offset : offset + limit],
-            }
+def get_ukhantukka(limit: int = 100, offset: int = 0, show_all: bool = False):
+    # Get the lists of Nepali, Roman, Meaning, and Example words based on the given parameters:
+    nepali_result = nepali(limit, offset, show_all)
+    roman_result = roman(limit, offset, show_all)
+    meaning_result = meaning(limit, offset, show_all)
+    example_result = example(limit, offset, show_all)
+
+    # Return the merged result
+    return {
+        **nepali_result,
+        **roman_result,
+        **meaning_result,
+        **example_result
+    }
 
 
+# Below defined endpoint and routes to get Nepali, Romanized version, meaning and and example usage of Ukhaan based on the given parameters:
 
 @app.get("/ukhaantukka/nepali")
 def nepali(limit: int = 100, offset: int = 0, show_all: bool = False):
-    if show_all:
-        return {
-            "Nepali": nepali_lists,
-        }
-    else:
-        return {
-            "Nepali": nepali_lists[offset : offset + limit],
-        }
+    return get_language_list("Nepali", nepali_lists, limit, offset, show_all)
 
 
 @app.get("/ukhaantukka/roman")
 def roman(limit: int = 100, offset: int = 0, show_all: bool = False):
-    if show_all:
-        return {
-            'Roman': roman_lists,
-        }
-    else:
-        return {
-            'Roman': roman_lists[offset : offset + limit],
-        }
+    return get_language_list("Roman", roman_lists, limit, offset, show_all)
 
 
 @app.get("/ukhaantukka/meaning")
 def meaning(limit: int = 100, offset: int = 0, show_all: bool = False):
-    if show_all:
-        return {
-            'Meaning': meaning_lists,
-        }
-    else:
-        return {
-            'Meaning': meaning_lists[offset : offset + limit],
-        }
+    return get_language_list("Meaning", meaning_lists, limit, offset, show_all)
 
 
 @app.get("/ukhaantukka/example")
 def example(limit: int = 100, offset: int = 0, show_all: bool = False):
-    if show_all:
-        return {
-            'Example': example_lists,
-        }
-    else:
-        return {
-            'Example': example_lists[offset : offset + limit],
-        }
+    return get_language_list("example", example_lists, limit, offset, show_all)
 
 
+
+# Define endpoint to get a random Ukhaan.
 @app.get("/random-ukhaan")
 def random_ukhaan():    
     return functionalities.random_ukhaan()
 
 
+
+# Below are the defined endpoints ard routes get Nepali, Romanized version, meaning and an example usage of random ukhaan.
 
 @app.get("/random-ukhaan/nepali")
 def random_nepali():

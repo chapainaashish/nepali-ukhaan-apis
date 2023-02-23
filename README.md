@@ -1,7 +1,7 @@
 
 # Ukhaan Tukka API
 
-The *UkhaanTukka* API provides access to a list of Nepali idioms, known as *ukhaan* in Nepali, along with their Roman transliteration, English meaning, and an example sentence. The API makes a request to the **`README.md`** file from <a href = 'https://github.com/chapainaashish/nepali-ukhaan'>nepali-ukhaan</a> repository to the fetch data and can be used to fetch the full list of *ukhaan* ~~or to search for a particular *ukhaan* based on its Nepali name, Roman transliteration, or meaning~~
+The *UkhaanTukka* API provides access to a list of Nepali idioms, known as *ukhaan* in Nepali, along with their Roman transliteration, English meaning, and an example sentence. The API makes a request to the **`README.md`** file from <a href = 'https://github.com/chapainaashish/nepali-ukhaan'>nepali-ukhaan</a> repository to fetch datas and can be used to fetch the full list of *ukhaan* ~~or to search for a particular *ukhaan* based on its Nepali name, Roman transliteration, or meaning~~
 
 This API is built using FastAPI, a modern, fast, web framework for building APIs with Python. 
 
@@ -12,6 +12,7 @@ This API is built using FastAPI, a modern, fast, web framework for building APIs
 - **`/ukhaantukka/roman`**: Retrieves a paginated list of *ukhaan* sorted by Roman text.<br>
 - **`/ukhaantukka/meaning`**: Retrieves a paginated list of *ukhaan* sorted by their meaning.<br>
 - **`/ukhaantukka/example`**: Retrieves a paginated list of *ukhaan* sorted by example usage.<br>
+
 - **`/random-ukhaan`**: Retrieves a random *ukhaan* from the list.
 - **`/random-ukhaan/nepali`**: Retrieves a random Nepali *ukhaan* from the list.
 - **`/random-ukhaan/roman`**: Retrieves a random Roman *ukhaan*.

@@ -3,89 +3,104 @@ import markdown
 import requests
 from bs4 import BeautifulSoup
 
-class UkhaanTable:
-    def __init__(self):        
+
+# This function retrieves a list of ukhaan and their iteration based on parameters such as limit and offset:
+def get_language_list(language_name, language_list, limit: int = 100, offset: int = 0, show_all: bool = False):
+    if show_all:
+        return {
+            language_name: language_list,
+        }
+    else:
+        return {
+            language_name: language_list[offset: offset + limit],        }
+
+
+# This class retrieves data from a Nepali proverb table:
+class UkhaanTable:    
+    def __init__(self): 
+        # Retrieve the raw markdown text from the `nepali-ukhaan` repository on GitHub and convert to HTML for parsing purposes.         
         req = requests.get('https://raw.githubusercontent.com/chapainaashish/nepali-ukhaan/main/README.md')
         html = markdown.markdown(req.text)
-       
+        
+        # Making a soup to parse the HTML to retrieve the Nepali proverb table
         soup = BeautifulSoup(html, 'html.parser')
         self.ukhaan_tables = soup.find_all('p')[-1].text.split("\n")[2:]
             
     
-    # This method to extract Nepali and Roman lists:
-    def extract_phase_one(self, indexes):
+    # This method extracts the Nepali or Roman list from the Nepali proverb table based on the given index.
+    def extract_phase_one(self, indexes):        
         into_list_comprehension = [tab.split("|")[indexes] for tab in self.ukhaan_tables]
         return into_list_comprehension
 
     
-    # This method to extract Meaning and Example lists:
-    def extract_phase_two(self):
-        # Below snippet need more optimization, I am sure there's better aprroach than this:
-        meaning_lists = []
-        example_lists = []
-        for contents in self.ukhaan_tables:
-            split_contents = contents.split("|")
-            if len(split_contents) == 2:     # length 2 ensure that the meaning and example column is empty:           
-                meaning_lists.append("")
-                example_lists.append("")
-            elif len(split_contents) == 3:   # 3 ensure meaning column           
-                meaning_lists.append(split_contents[-1].strip())
-                example_lists.append("")
-            elif len(split_contents) == 4:   # 4 ensure example column:        
-                meaning_lists.append(split_contents[-2].strip())
-                example_lists.append(split_contents[-1].strip())    
-            else:
-                continue
-        
-        return meaning_lists, example_lists
-        
+    # This method extracts the meaning and example lists from the Nepali proverb table:
+    def extract_phase_two(self):        
+        # This code snippet extracts the meaning and example lists from self.ukhaan_tables using list comprehension method.
 
-    def nepali(self):
+        # If a row in self.ukhaan_tables has 4 fields (i.e. separated by '|'), the second-to-last field is assumed to be the meaning
+        # and the last field is assumed to be the example. If a row has 3 fields, only the last field is assumed to be the meaning.
+        # If a row has less than 3 fields, both meaning and example are set to empty string.
+        # The resulting meaning and example lists are returned as a tuple.
+        meaning_lists = [
+                            row.split("|")[-2].strip() if len(row.split("|")) == 4 else
+                            row.split("|")[-1].strip() if len(row.split("|")) == 3 else
+                            "" for row in self.ukhaan_tables    
+                        ]
+        example_lists = [
+                            row.split("|")[-1].strip() if len(row.split("|")) == 4 else
+                            "" for row in self.ukhaan_tables        
+                        ]
+        
+        return meaning_lists, example_lists        
+        
+    # Below methods return a list of nepali, romanized version, meaning and an example usage of ukhaan.
+    
+    def nepali(self):        
         return [nep.strip() for nep in self.extract_phase_one(0)]
     
-    def roman(self):
-        return [rom.strip() for rom in self.extract_phase_one(1)]    
+    def roman(self):        
+        return [rom.strip() for rom in self.extract_phase_one(1)]  
     
-
-    def meaning(self):
+    def meaning(self):        
         return self.extract_phase_two()[0]
     
-    def example(self):
+    def example(self):        
         return self.extract_phase_two()[-1]
 
-class UkhaanFunctionalities(UkhaanTable):
-    def __init__(self):
-        super().__init__()
-        
 
-    def random_ukhaan(self):        
-        indexes = random.randint(0, len(self.extract_phase_one(0)))
-        nepali = self.extract_phase_one(0)[indexes]
-        roman = self.extract_phase_one(1)[indexes]
-        meaning = self.extract_phase_two()[0][indexes]
-        example = self.extract_phase_two()[-1][indexes]
+# This class provides additional functionalities for the ukhaan table.
+class UkhaanFunctionalities(UkhaanTable):    
+    def __init__(self):
+        super().__init__()        
+
+    # This method returns a random ukhaan along with its corresponding romanization, meaning, and example as a dictionary.
+    def random_ukhaan(self):      
+        indexes = random.randint(0, len(self.extract_phase_one(0)))       
 
         data = {
-                'Nepali': nepali.strip(),
-                'Roman': roman.strip(),
-                'Meaning': meaning.strip(),
-                'Example': example.strip(),
+                'Nepali': self.extract_phase_one(0)[indexes].strip(),
+                'Roman': self.extract_phase_one(1)[indexes].strip(),
+                'Meaning': self.extract_phase_two()[0][indexes].strip(),
+                'Example': self.extract_phase_two()[-1][indexes].strip(),
             }
         
         return data
     
-    def random_nepali(self):
+    # Below methods returns a Nepali, romanized version, meaning and an example usage of a random Nepali ukhaan.
+        
+    def random_nepali(self):        
         indexes = random.randint(0, len(self.extract_phase_one(0)))
         return self.extract_phase_one(0)[indexes]
 
-    def random_roman(self):
+    def random_roman(self):    
         indexes = random.randint(0, len(self.extract_phase_one(1)))
         return self.extract_phase_one(1)[indexes]
     
-    def random_meaning(self):
+    def random_meaning(self):        
         indexes = random.randint(0, len(self.extract_phase_two()[0]))
         return self.extract_phase_two()[0][indexes]
     
-    def random_example(self):
+    def random_example(self):    
         indexes = random.randint(0, len(self.extract_phase_two()[-1]))
         return self.extract_phase_two()[-1][indexes]
+
