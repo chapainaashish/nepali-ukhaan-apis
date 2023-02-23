@@ -12,7 +12,8 @@ def get_language_list(language_name, language_list, limit: int = 100, offset: in
         }
     else:
         return {
-            language_name: language_list[offset: offset + limit],        }
+            language_name: language_list[offset: offset + limit],
+            }
 
 
 # This class retrieves data from a Nepali proverb table:
