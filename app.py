@@ -18,7 +18,7 @@ app = FastAPI()
 
 
 # Define a route to get all UkhaanTukka:
-@app.get("/ukhaantukka")
+@app.get("/")
 def get_ukhantukka(limit: int = 100, offset: int = 0, show_all: bool = False):
     # Get the lists of Nepali, Roman, Meaning, and Example words based on the given parameters:
     nepali_result = nepali(limit, offset, show_all)
@@ -37,22 +37,22 @@ def get_ukhantukka(limit: int = 100, offset: int = 0, show_all: bool = False):
 
 # Below defined endpoint and routes to get Nepali, Romanized version, meaning and and example usage of Ukhaan based on the given parameters:
 
-@app.get("/ukhaantukka/nepali")
+@app.get("/nepali")
 def nepali(limit: int = 100, offset: int = 0, show_all: bool = False):
     return get_language_list("Nepali", nepali_lists, limit, offset, show_all)
 
 
-@app.get("/ukhaantukka/roman")
+@app.get("/roman")
 def roman(limit: int = 100, offset: int = 0, show_all: bool = False):
     return get_language_list("Roman", roman_lists, limit, offset, show_all)
 
 
-@app.get("/ukhaantukka/meaning")
+@app.get("/meaning")
 def meaning(limit: int = 100, offset: int = 0, show_all: bool = False):
     return get_language_list("Meaning", meaning_lists, limit, offset, show_all)
 
 
-@app.get("/ukhaantukka/example")
+@app.get("/example")
 def example(limit: int = 100, offset: int = 0, show_all: bool = False):
     return get_language_list("example", example_lists, limit, offset, show_all)
 

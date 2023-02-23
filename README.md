@@ -7,17 +7,17 @@ This API is built using FastAPI, a modern, fast, web framework for building APIs
 
 # Endpoints
 
-- **`/ukhaantukka`**: Retrieves a paginated list of all *ukhaan*.<br>
-- **`/ukhaantukka/nepali`**: Retrieves a paginated list of *ukhaan* sorted by Nepali text.<br>
-- **`/ukhaantukka/roman`**: Retrieves a paginated list of *ukhaan* sorted by Roman text.<br>
-- **`/ukhaantukka/meaning`**: Retrieves a paginated list of *ukhaan* sorted by their meaning.<br>
-- **`/ukhaantukka/example`**: Retrieves a paginated list of *ukhaan* sorted by example usage.<br>
+- **`/localhost`**: Retrieves a paginated list of all *ukhaan*.<br>
+- **`/localhost/nepali`**: Retrieves a paginated list of *ukhaan* sorted by Nepali text.<br>
+- **`/localhost/roman`**: Retrieves a paginated list of *ukhaan* sorted by Roman text.<br>
+- **`/localhost/meaning`**: Retrieves a paginated list of *ukhaan* sorted by their meaning.<br>
+- **`/localhost/example`**: Retrieves a paginated list of *ukhaan* sorted by example usage.<br>
 
-- **`/random-ukhaan`**: Retrieves a random *ukhaan* from the list.
-- **`/random-ukhaan/nepali`**: Retrieves a random Nepali *ukhaan* from the list.
-- **`/random-ukhaan/roman`**: Retrieves a random Roman *ukhaan*.
-- **`/random-ukhaan/meaning`**: Retrieves a random *ukhaan* along with its meaning.
-- **`/random-ukhaan/example`**: Retrieves a random *ukhaan* along with an example sentence.
+- **`localhost/random-ukhaan`**: Retrieves a random *ukhaan* from the list.
+- **`localhost/random-ukhaan/nepali`**: Retrieves a random Nepali *ukhaan* from the list.
+- **`localhost/random-ukhaan/roman`**: Retrieves a random Roman *ukhaan*.
+- **`localhost/random-ukhaan/meaning`**: Retrieves a random *ukhaan* along with its meaning.
+- **`localhost/random-ukhaan/example`**: Retrieves a random *ukhaan* along with an example sentence.
 
 # Query Parameters
 
