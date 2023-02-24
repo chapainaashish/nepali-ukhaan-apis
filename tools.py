@@ -1,7 +1,12 @@
 import random
 import markdown
 import requests
+import itertools
 from bs4 import BeautifulSoup
+
+
+def flat_lists(d_lists):
+    return list(itertools.chain(*d_lists))
 
 
 # This function retrieves a list of ukhaan and their iteration based on parameters such as limit and offset:
@@ -25,12 +30,13 @@ class UkhaanTable:
         
         # Making a soup to parse the HTML to retrieve the Nepali proverb table
         soup = BeautifulSoup(html, 'html.parser')
-        self.ukhaan_tables = soup.find_all('p')[-1].text.split("\n")[2:]
-            
+        table_tags = soup.find_all('p')[-1]
+        # self.ukhaan_tables = flat_lists([child.text.split("\n") for child in table_tags.children if child.name != 'span'][2:])
+        self.ukhaan_tables = soup.find_all('p')[-1].text.split("\n")[3:]         
     
     # This method extracts the Nepali or Roman list from the Nepali proverb table based on the given index.
-    def extract_phase_one(self, indexes):        
-        into_list_comprehension = [tab.split("|")[indexes] for tab in self.ukhaan_tables]
+    def extract_phase_one(self, indexes):                
+        into_list_comprehension = [tab.split("|")[indexes].strip() for tab in self.ukhaan_tables]
         return into_list_comprehension
 
     
@@ -60,7 +66,7 @@ class UkhaanTable:
         return [nep.strip() for nep in self.extract_phase_one(0)]
     
     def roman(self):        
-        return [rom.strip() for rom in self.extract_phase_one(1)]  
+        return [rom.strip() for rom in self.extract_phase_one(-1)]  
     
     def meaning(self):        
         return self.extract_phase_two()[0]
@@ -80,7 +86,7 @@ class UkhaanFunctionalities(UkhaanTable):
 
         data = {
                 'Nepali': self.extract_phase_one(0)[indexes].strip(),
-                'Roman': self.extract_phase_one(1)[indexes].strip(),
+                'Roman': self.extract_phase_one(-1)[indexes].strip(),
                 'Meaning': self.extract_phase_two()[0][indexes].strip(),
                 'Example': self.extract_phase_two()[-1][indexes].strip(),
             }
