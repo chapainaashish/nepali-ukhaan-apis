@@ -31,13 +31,12 @@ class UkhaanTable:
         # Making a soup to parse the HTML to retrieve the Nepali proverb table
         soup = BeautifulSoup(html, 'html.parser')
         table_tags = soup.find_all('p')[-1]
-        self.ukhaan_tables = flat_lists([child.text.split("\n") for child in table_tags.children if child.name != 'span'][2:])
-         
+        # self.ukhaan_tables = flat_lists([child.text.split("\n") for child in table_tags.children if child.name != 'span'][2:])
+        self.ukhaan_tables = soup.find_all('p')[-1].text.split("\n")[3:]         
     
     # This method extracts the Nepali or Roman list from the Nepali proverb table based on the given index.
-    def extract_phase_one(self, indexes):   
-        # return self.ukhaan_tables      
-        into_list_comprehension = [tab.split("|")[indexes] for tab in self.ukhaan_tables]
+    def extract_phase_one(self, indexes):                
+        into_list_comprehension = [tab.split("|")[indexes].strip() for tab in self.ukhaan_tables]
         return into_list_comprehension
 
     
