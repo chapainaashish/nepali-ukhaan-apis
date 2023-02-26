@@ -5,6 +5,7 @@ import itertools
 from bs4 import BeautifulSoup
 
 
+# This little function to avoid nested lists:
 def flat_lists(d_lists):
     return list(itertools.chain(*d_lists))
 
@@ -30,16 +31,21 @@ class UkhaanTable:
         
         # Making a soup to parse the HTML to retrieve the Nepali proverb table
         soup = BeautifulSoup(html, 'html.parser')
-        table_tags = soup.find_all('p')[-1]
-        # self.ukhaan_tables = flat_lists([child.text.split("\n") for child in table_tags.children if child.name != 'span'][2:])
-        self.ukhaan_tables = soup.find_all('p')[-1].text.split("\n")[3:]         
+
+        for span_tag in soup.find_all(['span', 'br']): span_tag.decompose()
+        self.table = soup.find_all('p')[-1]
+
+        nested_lists = [tab.text.split("\n") for tab in self.table]
+        # Filtering the list that give an empty string in a newline
+        filtered_lists = [[item for item in sublist if item != ''] for sublist in nested_lists]
+        # Flattening the nested/multi-dimensional list
+        self.ukhaan_tables = flat_lists(filtered_lists[1:])        
     
     # This method extracts the Nepali or Roman list from the Nepali proverb table based on the given index.
-    def extract_phase_one(self, indexes):                
-        into_list_comprehension = [tab.split("|")[indexes].strip() for tab in self.ukhaan_tables]
-        return into_list_comprehension
-
-    
+    def extract_phase_one(self, indexes):        
+        into_list_comprehension = [tab.split("|")[indexes].strip() for tab in self.ukhaan_tables]        
+        return into_list_comprehension        
+            
     # This method extracts the meaning and example lists from the Nepali proverb table:
     def extract_phase_two(self):        
         # This code snippet extracts the meaning and example lists from self.ukhaan_tables using list comprehension method.
@@ -66,7 +72,7 @@ class UkhaanTable:
         return [nep.strip() for nep in self.extract_phase_one(0)]
     
     def roman(self):        
-        return [rom.strip() for rom in self.extract_phase_one(-1)]  
+        return [rom.strip() for rom in self.extract_phase_one(1)]  
     
     def meaning(self):        
         return self.extract_phase_two()[0]
@@ -86,7 +92,7 @@ class UkhaanFunctionalities(UkhaanTable):
 
         data = {
                 'Nepali': self.extract_phase_one(0)[indexes].strip(),
-                'Roman': self.extract_phase_one(-1)[indexes].strip(),
+                'Roman': self.extract_phase_one(1)[indexes].strip(),
                 'Meaning': self.extract_phase_two()[0][indexes].strip(),
                 'Example': self.extract_phase_two()[-1][indexes].strip(),
             }

@@ -1,3 +1,4 @@
 from tools import UkhaanTable
 
-print(UkhaanTable().extract_phase_one(-1))
+a = UkhaanTable().extract_phase_one(-1)
+print(a)
