@@ -31,16 +31,16 @@ The following query parameters can be used to modify the results returned by the
 
 To retrieve a list of *ukhaan*, make a GET request to the following endpoint:
 ```python
-http://localhost:8000/ukhaantukka
+http://localhost:8000/
 ```
 The response will be a JSON object containing a list of *ukhaan*. You can use the **`limit`** and **`offset`** query parameters to paginate the results. For example, to retrieve the first 10 *ukhaan*, you can make the following request:
 ```python
-http://localhost:8000/ukhaantukka?limit=10&offset=0
+http://localhost:8000?limit=10&offset=0
 ```
 
 To retrieve all *ukhaan* at once, without pagination:
 ```python
-http://localhost:8000/ukhaantukka?show_all=true
+http://localhost:8000?show_all=true
 ```
 To retrieve all the random *ukhaan* with its Nepali and Roman transliteration along with meaning.
 ```python
