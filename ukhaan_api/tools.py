@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 class RetrieveUkhaan:
-    """Retrieves latest ukhaan from source and store them them pythonically"""
+    """Retrieves latest ukhaan from source and store them pythonically"""
 
     def __init__(self) -> None:
         # pulling latest ukhaan
@@ -84,7 +84,7 @@ class RetrieveUkhaan:
 
 
 class RetrieveUkhaanAPI(RetrieveUkhaan):
-    """Utility class specifically made for API call"""
+    """Helper class specifically made for API call"""
 
     def __init__(self) -> None:
         super().__init__()
@@ -92,7 +92,7 @@ class RetrieveUkhaanAPI(RetrieveUkhaan):
     def _limit_ukhaan(
         self, category_name: str, ukhaan: list, limit: int, offset: int, show_all: bool
     ) -> dict:
-        """Retrieve ukhaan dynamically"""
+        """Implements limit and offset for ukhaan"""
         if show_all:
             return {
                 category_name: ukhaan,
@@ -138,21 +138,21 @@ class RetrieveUkhaanAPI(RetrieveUkhaan):
             "Example", ukhaan_example, limit=limit, offset=offset, show_all=show_all
         )
 
-    def retrieve_random_ukhaan(self):
+    def retrieve_random_ukhaan(self) -> tuple:
         """
         Retrieves a random nepali ukhaan
         """
         index = random.randint(0, len(super().ukhaan()))
         return super().ukhaan()[index]
 
-    def retrieve_random_roman(self):
+    def retrieve_random_roman(self) -> str:
         """
         Retrieves a random nepali ukhaan in roman nepali format
         """
         index = random.randint(0, len(super().roman()))
         return super().roman()[index]
 
-    def retrieve_random_example(self):
+    def retrieve_random_example(self) -> str:
         """
         Retrieves a random ukhaan example
         """
