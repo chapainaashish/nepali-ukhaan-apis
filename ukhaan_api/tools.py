@@ -145,6 +145,13 @@ class RetrieveUkhaanAPI(RetrieveUkhaan):
         index = random.randint(0, len(super().ukhaan()))
         return super().ukhaan()[index]
 
+    def retrieve_random_nepali(self) -> str:
+        """
+        Retrieves a random nepali ukhaan in nepali language
+        """
+        index = random.randint(0, len(super().nepali()))
+        return super().nepali()[index]
+
     def retrieve_random_roman(self) -> str:
         """
         Retrieves a random nepali ukhaan in roman nepali format

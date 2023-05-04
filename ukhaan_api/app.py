@@ -46,6 +46,12 @@ def random_ukhaan():
     return {result}
 
 
+@app.get("/random/nepali")
+def random_nepali():
+    result = ukhaan.retrieve_random_nepali()
+    return {result}
+
+
 @app.get("/random/roman")
 def random_roman():
     result = ukhaan.retrieve_random_roman()
