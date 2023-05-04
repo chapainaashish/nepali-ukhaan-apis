@@ -3,3 +3,4 @@ tukka
 .deta
 debug.py
 .vscode
+.pytest_cache

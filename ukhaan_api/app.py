@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from tools import RetrieveUkhaanAPI
+
+from .tools import RetrieveUkhaanAPI
 
 # TODO: return response in dictionary format with key value pair
 

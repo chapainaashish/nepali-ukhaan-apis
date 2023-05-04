@@ -30,6 +30,8 @@ uvicorn = "0.20.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
+httpx = "^0.24.0"
+pytest = "^7.3.1"
 
 [build-system]
 requires = ["poetry-core"]
