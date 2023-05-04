@@ -1,4 +1,5 @@
 import itertools
+import random
 
 import markdown
 import requests
@@ -128,15 +129,6 @@ class RetrieveUkhaanAPI(RetrieveUkhaan):
             "Roman", roman_ukhaan, limit=limit, offset=offset, show_all=show_all
         )
 
-    def retrieve_meaning(self, limit: int, offset: int, show_all: bool) -> dict:
-        """
-        Retrieves a list of Nepali ukhaan meaning
-        """
-        ukhaan_meaning = super().meaning()
-        return self._limit_ukhaan(
-            "Meaning", ukhaan_meaning, limit=limit, offset=offset, show_all=show_all
-        )
-
     def retrieve_example(self, limit: int, offset: int, show_all: bool) -> dict:
         """
         Retrieves a list of Nepali ukhaan example
@@ -145,3 +137,24 @@ class RetrieveUkhaanAPI(RetrieveUkhaan):
         return self._limit_ukhaan(
             "Example", ukhaan_example, limit=limit, offset=offset, show_all=show_all
         )
+
+    def retrieve_random_ukhaan(self):
+        """
+        Retrieves a random nepali ukhaan
+        """
+        index = random.randint(0, len(super().ukhaan()))
+        return super().ukhaan()[index]
+
+    def retrieve_random_roman(self):
+        """
+        Retrieves a random nepali ukhaan in roman nepali format
+        """
+        index = random.randint(0, len(super().roman()))
+        return super().roman()[index]
+
+    def retrieve_random_example(self):
+        """
+        Retrieves a random ukhaan example
+        """
+        index = random.randint(0, len(super().example()))
+        return super().example()[index]
