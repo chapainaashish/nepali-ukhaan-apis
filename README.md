@@ -1,6 +1,12 @@
 
 # Nepali-Ukhaan-APIs
-The *Nepali-Ukhaan* API provides access to a list of Nepali idioms, known as *ukhaan* in Nepali, along with their Roman transliteration, English meaning, and an example sentence. The API makes a request to the **`README.md`** file from <a href = 'https://github.com/chapainaashish/nepali-ukhaan'>nepali-ukhaan</a> 
+The *Nepali-Ukhaan* API provides access to a list of Nepali idioms, known as *ukhaan* in Nepali, along with their Roman transliteration, English meaning, and an example sentence. The API makes a request to the **`README.md`** file from <a href = 'https://github.com/chapainaashish/nepali-ukhaan'>nepali-ukhaan. </a> 
+
+**UPDATE: API IS LIVE**
+
+https://nepaliukhaan.onrender.com/
+
+
 
 This API is built using FastAPI, a modern, fast, web framework for building APIs with Python
 
